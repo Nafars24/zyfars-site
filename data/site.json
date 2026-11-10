@@ -12,6 +12,59 @@
   },
   "games": [
     {
+      "id": "the-sims-2",
+      "name": "The Sims 2",
+      "plat": "PSP",
+      "ext": "iso",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "Final",
+      "progress": 100,
+      "downloads": 0,
+      "desc": "THE SIMS 2 PSP BAHASA INDONESIA",
+      "file": "THE SIMS 2 PSP (Zyfars).zip",
+      "size": "1Gb",
+      "url": "https://drive.google.com/file/d/1EDl2wFo45bvlYF4320kcpBnDCHTViFr4/view?usp=sharing",
+      "video": {
+        "yt": "",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "PPSSPP",
+          1
+        ],
+        [
+          "Konsol PSP",
+          1
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "FINAL"
+        ]
+      ],
+      "cover": "covers/the-sims-2.jpg"
+    },
+    {
       "id": "digimon-rumble-arena",
       "name": "Digimon Rumble Arena",
       "plat": "PS1",
@@ -254,7 +307,7 @@
       "pct": 5
     },
     {
-      "name": "The Sims 2",
+      "name": "Assassin Creed Bloodline",
       "plat": "PSP",
       "status": "Dikerjakan",
       "pct": 0
