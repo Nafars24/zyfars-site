@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root { --bg: #14082e; --bg2: #2a1060; --ink: #f3eeff; --dim: rgba(243,238,255,.62); --edge: rgba(255,255,255,.16); --glass: rgba(255,255,255,.07); --acc: #9fd0ff; --good: #8dffc1; --bad: #ff8e9c; --mono: "JetBrains Mono", ui-monospace, Consolas, monospace; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: dark; }
+body { min-height: 100vh; background: linear-gradient(180deg, var(--bg2), var(--bg)) fixed; color: var(--ink); font: 400 16px/1.5 "Jost", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 12px clamp(16px, 3vw, 36px); background: rgba(20,8,46,.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--edge); }
+header h1 { font-size: 17px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+header h1 small { font-weight: 300; color: var(--dim); letter-spacing: .06em; text-transform: none; margin-left: 8px; }
+nav { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+.tab { border: 1px solid transparent; background: transparent; padding: 7px 16px; border-radius: 99px; color: var(--dim); }
+.tab:hover { color: var(--ink); background: var(--glass); }
+.tab[aria-selected="true"] { color: var(--ink); background: rgba(159,208,255,.2); border-color: rgba(159,208,255,.5); }
+.dirty { font-size: 13px; padding: 3px 12px; border-radius: 99px; border: 1px solid var(--edge); color: var(--dim); white-space: nowrap; }
+.dirty.on { color: #ffd98a; border-color: rgba(255,217,138,.6); }
+main { max-width: 1100px; margin: 0 auto; padding: 24px clamp(16px, 3vw, 36px) 80px; }
+h2 { font-size: 24px; font-weight: 500; margin-bottom: 4px; }
+.lead { color: var(--dim); margin-bottom: 20px; max-width: 70ch; }
+.card { background: var(--glass); border: 1px solid var(--edge); border-radius: 16px; padding: 20px; margin-bottom: 18px; }
+.card h3 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); font-weight: 500; margin-bottom: 14px; }
+.grid { display: grid; gap: 14px 16px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.grid .wide { grid-column: 1 / -1; }
+label.f { display: block; }
+label.f > span { display: block; font-size: 13px; color: var(--dim); margin-bottom: 5px; }
+label.f > small { display: block; font-size: 12.5px; color: var(--dim); margin-top: 4px; }
+input[type=text], input[type=url], input[type=number], input[type=month], input[type=password], select, textarea { width: 100%; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--edge); background: rgba(0,0,0,.28); outline: none; }
+input:focus, select:focus, textarea:focus { border-color: var(--acc); box-shadow: 0 0 0 3px rgba(159,208,255,.22); }
+textarea { resize: vertical; min-height: 84px; }
+select option { background: #1b0d3d; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 10px; border: 1px solid var(--edge); background: rgba(255,255,255,.1); }
+.btn:hover { background: rgba(255,255,255,.18); }
+.btn.go { background: linear-gradient(180deg, #7fbcff, #4f86e8); color: #06122a; border-color: transparent; font-weight: 600; }
+.btn.go:hover { filter: brightness(1.08); }
+.btn.bad { color: var(--bad); border-color: rgba(255,142,156,.4); }
+.btn.sm { padding: 4px 12px; font-size: 14px; }
+.btn:disabled { opacity: .5; pointer-events: none; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.split { display: grid; gap: 18px; grid-template-columns: 290px minmax(0, 1fr); align-items: start; }
+@media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+.glist { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 76px; max-height: calc(100vh - 100px); overflow: auto; }
+.gi { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; align-items: center; text-align: left; padding: 8px; border-radius: 12px; border: 1px solid var(--edge); background: var(--glass); }
+.gi:hover { background: rgba(255,255,255,.12); }
+.gi[aria-current="true"] { border-color: rgba(159,208,255,.7); background: rgba(159,208,255,.16); }
+.gi img, .gi .ph { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: rgba(0,0,0,.3); display: block; }
+.gi .ph { display: grid; place-items: center; font-size: 11px; color: var(--dim); }
+.gi b { display: block; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gi small { color: var(--dim); font-size: 12.5px; }
+.cover { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.cover .pv { width: 112px; height: 112px; border-radius: 16px; object-fit: cover; border: 1px solid var(--edge); background: rgba(0,0,0,.3); display: grid; place-items: center; color: var(--dim); font-size: 13px; text-align: center; overflow: hidden; }
+.cover img.pv { display: block; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.checks label { display: flex; align-items: center; gap: 8px; }
+.checks input { width: 18px; height: 18px; accent-color: #7fbcff; }
+.lines { display: flex; flex-direction: column; gap: 8px; }
+.line { display: grid; gap: 8px; align-items: center; }
+.line.c2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; }
+.line.log { grid-template-columns: 90px minmax(0, 1fr) auto; }
+.line.sup { grid-template-columns: minmax(0, 1.2fr) 120px 120px 150px minmax(0, 1.6fr) auto; }
+.line.wip { grid-template-columns: minmax(0, 1.6fr) 90px minmax(0, 1fr) 90px auto; }
+@media (max-width: 820px) { .line.sup, .line.wip { grid-template-columns: 1fr 1fr; } .line.sup > :nth-child(5), .line.wip > :nth-child(1) { grid-column: 1 / -1; } }
+.x { border: 0; background: transparent; color: var(--dim); font-size: 20px; border-radius: 8px; width: 34px; height: 34px; }
+.x:hover { color: var(--bad); background: rgba(255,142,156,.12); }
+.note { color: var(--dim); font-size: 14px; }
+.warn { border: 1px solid rgba(255,217,138,.5); background: rgba(255,217,138,.08); border-radius: 12px; padding: 12px 14px; font-size: 14.5px; margin: 12px 0; }
+.ok { color: var(--good); } .err { color: var(--bad); }
+.log { font: 13px/1.6 var(--mono); background: rgba(0,0,0,.35); border-radius: 12px; padding: 12px 14px; min-height: 64px; max-height: 240px; overflow: auto; white-space: pre-wrap; margin-top: 12px; }
+ol.steps { margin: 8px 0 0 20px; color: var(--dim); font-size: 14.5px; } ol.steps li { margin: 4px 0; }
+code { font-family: var(--mono); font-size: .9em; background: rgba(0,0,0,.3); padding: 1px 6px; border-radius: 6px; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: #0d0626; border: 1px solid var(--edge); padding: 10px 20px; border-radius: 99px; opacity: 0; pointer-events: none; transition: .25s; z-index: 30; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Admin<small id="siteName"></small></h1>
+  <nav role="tablist" id="tabs"></nav>
+  <span class="dirty" id="dirty">Tersimpan</span>
+</header>
+<main id="main"></main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+"use strict";
+var $ = function (id) { return document.getElementById(id); };
+function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} return null; }
+var toastT = 0;
+function toast(m) { var t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove("on"); }, 2400); }
+
+var PLATS = { PS1: { ext: "bin", emu: ["DuckStation", "EPSXE", "Konsol PS1"] }, PS2: { ext: "iso", emu: ["PCSX2", "Konsol PS2"] }, PSP: { ext: "iso", emu: ["PPSSPP", "Konsol PSP"] } };
+var PAL = { a: "#4aa8ff", c: "#a9d8ff", d: "#1b4f9c", k: "#0a1630", w: "#ffffff" };
+var DATA = null;       // isi data/site.json yang sedang diedit
+var covers = {};       // id game -> dataURL JPG baru (belum dipublikasikan)
+var tab = "game", cur = 0, dirty = false;
+
+/* ---------- util ---------- */
+function slug(s) { return String(s).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "game"; }
+function uniqueId(base, except) { var id = base, n = 2; while (DATA.games.some(function (g) { return g !== except && g.id === id; })) id = base + "-" + n++; return id; }
+function blank() {
+  return { id: uniqueId("game-baru"), name: "", plat: "PS1", ext: "bin", sprite: "creature", pal: PAL, ver: "1.0", state: "Beta", progress: 100, downloads: 0, desc: "",
+    file: "", size: "", url: "", video: { yt: "", src: "" }, credits: [["Penerjemah", ""], ["Hacking & tools", ""]], compat: PLATS.PS1.emu.slice(0, 2).map(function (n) { return [n, 1]; }).concat([[PLATS.PS1.emu[2], 0]]),
+    log: [["v1.0", "Rilis pertama."]] };
+}
+function markDirty() { dirty = true; $("dirty").textContent = "Ada perubahan belum dipublikasikan"; $("dirty").classList.add("on"); ls("zyfars-admin-draft", JSON.stringify(DATA)); }
+function markClean() { dirty = false; $("dirty").textContent = "Tersimpan"; $("dirty").classList.remove("on"); ls("zyfars-admin-draft", null); covers = {}; }
+addEventListener("beforeunload", function (e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+function field(label, input, hint, wide) {
+  var l = el("label", "f" + (wide ? " wide" : "")); l.appendChild(el("span", null, label)); l.appendChild(input);
+  if (hint) l.appendChild(el("small", null, hint)); return l;
+}
+function inp(type, obj, key, opts) {
+  opts = opts || {};
+  var i = document.createElement(opts.tag || "input"); if (!opts.tag) i.type = type;
+  var v = obj[key]; i.value = v == null ? "" : v;
+  if (opts.ph) i.placeholder = opts.ph; if (opts.min != null) i.min = opts.min; if (opts.max != null) i.max = opts.max;
+  i.addEventListener("input", function () {
+    var val = i.value; if (type === "number") val = val === "" ? 0 : Number(val);
+    obj[key] = val; markDirty(); if (opts.live) opts.live(val);
+  });
+  return i;
+}
+
+/* ---------- tab Game ---------- */
+function coverSrc(g) { return covers[g.id] || (g.cover || "covers/" + g.id + ".jpg"); }
+function renderGames(root) {
+  root.appendChild(el("h2", null, "Game"));
+  root.appendChild(el("p", "lead", "Tambah atau ubah game. Game baru muncul paling atas. Setelah selesai, buka tab Publikasi."));
+  var wrap = el("div", "split"), list = el("div", "glist"), form = el("div");
+  var add = el("button", "btn go", "+ Game baru"); add.type = "button";
+  add.addEventListener("click", function () { DATA.games.unshift(blank()); cur = 0; markDirty(); render(); });
+  list.appendChild(add);
+  DATA.games.forEach(function (g, i) {
+    var b = el("button", "gi"); b.type = "button"; if (i === cur) b.setAttribute("aria-current", "true");
+    var im = document.createElement("img"); im.alt = ""; im.src = coverSrc(g);
+    im.addEventListener("error", function () { var p = el("div", "ph", "no cover"); im.replaceWith(p); });
+    b.appendChild(im); var t = el("div"); t.appendChild(el("b", null, g.name || "(tanpa nama)")); t.appendChild(el("small", null, g.plat + " · v" + g.ver + " · " + g.state)); b.appendChild(t);
+    b.addEventListener("click", function () { cur = i; render(); }); list.appendChild(b);
+  });
+  wrap.appendChild(list); wrap.appendChild(form); root.appendChild(wrap);
+  if (!DATA.games.length) { form.appendChild(el("p", "note", "Belum ada game. Klik “+ Game baru”.")); return; }
+  if (cur >= DATA.games.length) cur = DATA.games.length - 1;
+  gameForm(form, DATA.games[cur]);
+}
+function gameForm(root, g) {
+  var c1 = el("div", "card"); c1.appendChild(el("h3", null, "Info utama")); var gr = el("div", "grid");
+  gr.appendChild(field("Nama game", inp("text", g, "name", { ph: "contoh: Digimon Rumble Arena", live: function (v) {
+    if (!g._idEdited) { var old = g.id; g.id = uniqueId(slug(v), g); if (covers[old]) { covers[g.id] = covers[old]; delete covers[old]; } if (idIn) idIn.value = g.id; if (!fileEdited) { g.file = g.id + "-id.xdelta"; if (fileIn) fileIn.value = g.file; } }
+  } })));
+  var ps = document.createElement("select"); Object.keys(PLATS).forEach(function (k) { var o = el("option", null, k); o.value = k; ps.appendChild(o); }); ps.value = g.plat;
+  ps.addEventListener("change", function () { g.plat = ps.value; g.ext = PLATS[g.plat].ext; var old = g.compat || []; g.compat = PLATS[g.plat].emu.map(function (n, i) { var f = old.filter(function (x) { return x[0] === n; })[0]; return [n, f ? f[1] : (i < PLATS[g.plat].emu.length - 1 ? 1 : 0)]; }); markDirty(); render(); });
+  gr.appendChild(field("Platform", ps));
+  var ss = document.createElement("select"); ["Beta", "Final"].forEach(function (k) { var o = el("option", null, k); o.value = k; ss.appendChild(o); }); ss.value = String(g.state).toLowerCase() === "final" ? "Final" : "Beta";
+  ss.addEventListener("change", function () { g.state = ss.value; markDirty(); }); gr.appendChild(field("Status rilis", ss));
+  gr.appendChild(field("Versi", inp("text", g, "ver", { ph: "1.0" })));
+  gr.appendChild(field("Progres (%)", inp("number", g, "progress", { min: 0, max: 100 }), "Tampil di daftar game dan statistik beranda."));
+  gr.appendChild(field("Jumlah unduhan", inp("number", g, "downloads", { min: 0 })));
+  gr.appendChild(field("Deskripsi singkat", inp("text", g, "desc", { tag: "textarea", ph: "Beyblade PS1 BAHASA INDONESIA" }), null, true));
+  c1.appendChild(gr); root.appendChild(c1);
+
+  var idIn, fileIn, fileEdited = !!g.file && g.file !== g.id + "-id.xdelta";
+  var c2 = el("div", "card"); c2.appendChild(el("h3", null, "Cover")); var cv = el("div", "cover");
+  var pv = document.createElement("img"); pv.className = "pv"; pv.alt = "Cover"; pv.src = coverSrc(g); pv.addEventListener("error", function () { var d = el("div", "pv", "Belum ada cover"); pv.replaceWith(d); pv = d; });
+  var side = el("div"); var pick = document.createElement("input"); pick.type = "file"; pick.accept = "image/jpeg,image/png,image/webp"; pick.hidden = true;
+  var pb = el("button", "btn", "Pilih foto cover…"); pb.type = "button"; pb.addEventListener("click", function () { pick.click(); });
+  pick.addEventListener("change", function () {
+    var f = pick.files[0]; if (!f) return;
+    squareJpg(f, 320, function (err, url) {
+      if (err) { toast(err); return; }
+      covers[g.id] = url; if (pv.tagName !== "IMG") { var n = document.createElement("img"); n.className = "pv"; n.alt = "Cover"; pv.replaceWith(n); pv = n; } pv.src = url; markDirty(); toast("Cover diganti"); var y = scrollY; render(); scrollTo(0, y);
+    });
+  });
+  side.appendChild(pb); side.appendChild(pick);
+  side.appendChild(el("p", "note", "Foto dipotong persegi dan diperkecil otomatis (JPG). Disimpan sebagai covers/" + g.id + ".jpg."));
+  cv.appendChild(pv); cv.appendChild(side); c2.appendChild(cv); root.appendChild(c2);
+
+  var c3 = el("div", "card"); c3.appendChild(el("h3", null, "Berkas patch")); var g3 = el("div", "grid");
+  fileIn = inp("text", g, "file", { ph: "nama-patch.xdelta", live: function () { fileEdited = true; } });
+  g3.appendChild(field("Nama file", fileIn));
+  g3.appendChild(field("Ukuran", inp("text", g, "size", { ph: "contoh: 2,4 MB" })));
+  g3.appendChild(field("Link unduh", inp("url", g, "url", { ph: "https://…" }), "Link langsung ke file .xdelta (Google Drive, Mediafire, GitHub Releases, dll). Kosong = tombol unduh belum aktif.", true));
+  idIn = inp("text", g, "id", { live: function (v) { g._idEdited = true; } });
+  idIn.addEventListener("change", function () { var old = g.id; var nid = uniqueId(slug(idIn.value), g); if (nid !== old) { if (covers[old]) { covers[nid] = covers[old]; delete covers[old]; } g.id = nid; idIn.value = nid; markDirty(); render(); } });
+  g3.appendChild(field("ID (alamat halaman)", idIn, "Dipakai untuk link #id dan nama file cover. Biasanya tidak perlu diubah."));
+  c3.appendChild(g3); root.appendChild(c3);
+
+  var c4 = el("div", "card"); c4.appendChild(el("h3", null, "Video preview")); var g4 = el("div", "grid");
+  var vy = el("input"); vy.type = "url"; vy.placeholder = "https://youtu.be/…"; vy.value = g.video && g.video.yt ? "https://youtu.be/" + g.video.yt : (g.video && g.video.src) || "";
+  vy.addEventListener("input", function () {
+    var v = vy.value.trim(), m = v.match(/^[\w-]{11}$/) || v.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/);
+    if (m) g.video = { yt: m[1] || m[0], src: "" }; else g.video = { yt: "", src: /^(https?:\/\/|media\/)/.test(v) ? v : "" };
+    st.textContent = m ? "Terbaca sebagai video YouTube." : (g.video.src ? "Dipakai sebagai file video langsung." : (v ? "Link belum dikenali." : "")); markDirty();
+  });
+  var st = el("small"); g4.appendChild(field("Link YouTube", vy, "Tempel link YouTube biasa. Boleh dikosongkan.", true)); g4.lastChild.appendChild(st);
+  c4.appendChild(g4); root.appendChild(c4);
+
+  var c5 = el("div", "card"); c5.appendChild(el("h3", null, "Kompatibilitas")); var ck = el("div", "checks");
+  (g.compat || []).forEach(function (c) { var l = el("label"), i = document.createElement("input"); i.type = "checkbox"; i.checked = !!c[1]; i.addEventListener("change", function () { c[1] = i.checked ? 1 : 0; markDirty(); }); l.appendChild(i); l.appendChild(el("span", null, c[0])); ck.appendChild(l); });
+  c5.appendChild(ck); c5.appendChild(el("p", "note", "Centang = sudah dites jalan. Tidak dicentang = tampil dengan tanda tanya."));
+  root.appendChild(c5);
+
+  var c6 = el("div", "card"); c6.appendChild(el("h3", null, "Tim")); c6.appendChild(listEditor(g.credits, "c2", ["Peran", "Nama"], ["Penerjemah", "Nama"], function (row, a) { return [inp("text", a, 0, { ph: "Peran" }), inp("text", a, 1, { ph: "Nama" })]; }));
+  root.appendChild(c6);
+  var c7 = el("div", "card"); c7.appendChild(el("h3", null, "Changelog (terbaru di atas)")); c7.appendChild(listEditor(g.log, "log", null, ["v" + g.ver, ""], function (row, a) { return [inp("text", a, 0, { ph: "v1.1" }), inp("text", a, 1, { ph: "Apa yang berubah" })]; }, true));
+  root.appendChild(c7);
+
+  var dz = el("div", "row"); var del = el("button", "btn bad", "Hapus game ini"); del.type = "button";
+  del.addEventListener("click", function () { if (!confirm("Hapus “" + (g.name || "game ini") + "” dari daftar?")) return; DATA.games.splice(cur, 1); delete covers[g.id]; cur = Math.max(0, cur - 1); markDirty(); render(); });
+  dz.appendChild(del); root.appendChild(dz);
+}
+/* editor baris generik: arr = array of arrays */
+function listEditor(arr, cls, _h, newRow, mk, top) {
+  var box = el("div", "lines");
+  function draw() {
+    box.textContent = "";
+    arr.forEach(function (a, i) {
+      var r = el("div", "line " + cls), inputs = mk(r, a);
+      inputs.forEach(function (x) { x.addEventListener("input", markDirty); r.appendChild(x); });
+      var d = el("button", "x", "×"); d.type = "button"; d.setAttribute("aria-label", "Hapus baris"); d.addEventListener("click", function () { arr.splice(i, 1); markDirty(); draw(); }); r.appendChild(d);
+      box.appendChild(r);
+    });
+    var ad = el("button", "btn sm", "+ Tambah baris"); ad.type = "button";
+    ad.addEventListener("click", function () { var n = newRow.slice(); if (top) arr.unshift(n); else arr.push(n); markDirty(); draw(); });
+    box.appendChild(ad);
+  }
+  draw(); return box;
+}
+
+/* ---------- tab WIP ---------- */
+function renderWip(root) {
+  root.appendChild(el("h2", null, "Work In Progress"));
+  root.appendChild(el("p", "lead", "Daftar game yang sedang atau akan dikerjakan (tab WIP di situs)."));
+  var c = el("div", "card"); var box = el("div", "lines");
+  function draw() {
+    box.textContent = "";
+    DATA.roadmap.forEach(function (w, i) {
+      var r = el("div", "line wip");
+      var pl = document.createElement("select"); Object.keys(PLATS).forEach(function (k) { var o = el("option", null, k); o.value = k; pl.appendChild(o); }); pl.value = w.plat; pl.addEventListener("change", function () { w.plat = pl.value; markDirty(); });
+      r.appendChild(inp("text", w, "name", { ph: "Nama game" })); r.appendChild(pl); r.appendChild(inp("text", w, "status", { ph: "Dikerjakan" })); r.appendChild(inp("number", w, "pct", { min: 0, max: 100 }));
+      var d = el("button", "x", "×"); d.type = "button"; d.addEventListener("click", function () { DATA.roadmap.splice(i, 1); markDirty(); draw(); }); r.appendChild(d); box.appendChild(r);
+    });
+    var ad = el("button", "btn sm", "+ Tambah"); ad.type = "button"; ad.addEventListener("click", function () { DATA.roadmap.push({ name: "", plat: "PS1", status: "Dikerjakan", pct: 0 }); markDirty(); draw(); }); box.appendChild(ad);
+  }
+  draw(); c.appendChild(box); root.appendChild(c);
+}
+
+/* ---------- tab Pendukung ---------- */
+function thisMonth() { var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); }
+function renderSup(root) {
+  root.appendChild(el("h2", null, "Pendukung"));
+  root.appendChild(el("p", "lead", "Isi dari dashboard Trakteer atau Saweria. Leaderboard dihitung dari daftar ini (per bulan dan sepanjang waktu)."));
+  var c = el("div", "card"), box = el("div", "lines");
+  function draw() {
+    box.textContent = "";
+    DATA.supporters.forEach(function (s, i) {
+      var r = el("div", "line sup");
+      var via = document.createElement("select"); ["Trakteer", "Saweria"].forEach(function (k) { var o = el("option", null, k); o.value = k; via.appendChild(o); }); via.value = s.via; via.addEventListener("change", function () { s.via = via.value; markDirty(); });
+      r.appendChild(inp("text", s, "n", { ph: "Nama" })); r.appendChild(inp("number", s, "amt", { min: 0 })); r.appendChild(via); r.appendChild(inp("month", s, "ym")); r.appendChild(inp("text", s, "msg", { ph: "Pesan (opsional)" }));
+      var d = el("button", "x", "×"); d.type = "button"; d.addEventListener("click", function () { DATA.supporters.splice(i, 1); markDirty(); draw(); }); r.appendChild(d); box.appendChild(r);
+    });
+    var ad = el("button", "btn sm", "+ Tambah pendukung"); ad.type = "button"; ad.addEventListener("click", function () { DATA.supporters.unshift({ n: "", amt: 10000, via: "Trakteer", ym: thisMonth(), msg: "" }); markDirty(); draw(); }); box.appendChild(ad);
+  }
+  draw(); c.appendChild(box); root.appendChild(c);
+  root.appendChild(el("p", "note", "Kolom: nama, nominal (Rp), platform, bulan, pesan."));
+}
+
+/* ---------- tab Situs ---------- */
+function renderSite(root) {
+  root.appendChild(el("h2", null, "Pengaturan situs"));
+  var c = el("div", "card"); c.appendChild(el("h3", null, "Kontak & donasi")); var g = el("div", "grid");
+  g.appendChild(field("Kontak (ditampilkan di tab Kontak)", inp("text", DATA, "contact")));
+  g.appendChild(field("Link Trakteer", inp("url", DATA.donate, "trakteer")));
+  g.appendChild(field("Link Saweria", inp("url", DATA.donate, "saweria")));
+  c.appendChild(g); root.appendChild(c);
+  var c2 = el("div", "card"); c2.appendChild(el("h3", null, "Target donasi")); var g2 = el("div", "grid");
+  g2.appendChild(field("Tujuan", inp("text", DATA.donate.goal, "label")));
+  g2.appendChild(field("Target (Rp)", inp("number", DATA.donate.goal, "target", { min: 0 })));
+  g2.appendChild(field("Terkumpul (Rp)", inp("number", DATA.donate.goal, "current", { min: 0 })));
+  c2.appendChild(g2); root.appendChild(c2);
+  var c3 = el("div", "card"), l = el("label", "checks"), i = document.createElement("input"); i.type = "checkbox"; i.checked = !!DATA.sample;
+  i.addEventListener("change", function () { DATA.sample = i.checked; markDirty(); }); l.appendChild(i); l.appendChild(el("span", null, "Tampilkan label “Data contoh” di pojok situs")); c3.appendChild(l); root.appendChild(c3);
+}
+
+/* ---------- ZIP (tanpa kompresi) ---------- */
+var CRC = (function () { var t = [], n, k, c; for (n = 0; n < 256; n++) { c = n; for (k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(b) { var c = 0xFFFFFFFF; for (var i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function makeZip(files) {
+  var enc = new TextEncoder(), parts = [], cen = [], off = 0, d = new Date();
+  var dt = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate(), tm = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+  files.forEach(function (f) {
+    var nm = enc.encode(f.name), cr = crc32(f.data), h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true); h.setUint16(10, tm, true); h.setUint16(12, dt, true);
+    h.setUint32(14, cr, true); h.setUint32(18, f.data.length, true); h.setUint32(22, f.data.length, true); h.setUint16(26, nm.length, true); h.setUint16(28, 0, true);
+    parts.push(new Uint8Array(h.buffer), nm, f.data);
+    var c = new DataView(new ArrayBuffer(46));
+    c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, 0, true); c.setUint16(12, tm, true); c.setUint16(14, dt, true);
+    c.setUint32(16, cr, true); c.setUint32(20, f.data.length, true); c.setUint32(24, f.data.length, true); c.setUint16(28, nm.length, true); c.setUint32(42, off, true);
+    cen.push(new Uint8Array(c.buffer), nm); off += 30 + nm.length + f.data.length;
+  });
+  var csz = cen.reduce(function (a, b) { return a + b.length; }, 0), e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, csz, true); e.setUint32(16, off, true);
+  return new Blob(parts.concat(cen, [new Uint8Array(e.buffer)]), { type: "application/zip" });
+}
+function dataUrlBytes(u) { var b = atob(u.split(",")[1]), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+function squareJpg(file, size, cb) {
+  if (!/^image\//.test(file.type)) return cb("File bukan gambar");
+  var url = URL.createObjectURL(file), im = new Image();
+  im.onload = function () {
+    var s = Math.min(im.naturalWidth, im.naturalHeight), c = document.createElement("canvas"); c.width = c.height = Math.min(size, s);
+    var x = c.getContext("2d"); x.fillStyle = "#000"; x.fillRect(0, 0, c.width, c.height);
+    x.drawImage(im, (im.naturalWidth - s) / 2, (im.naturalHeight - s) / 2, s, s, 0, 0, c.width, c.height);
+    URL.revokeObjectURL(url); cb(null, c.toDataURL("image/jpeg", 0.86));
+  };
+  im.onerror = function () { URL.revokeObjectURL(url); cb("Gambar tidak bisa dibaca"); }; im.src = url;
+}
+
+/* ---------- Publikasi ---------- */
+function cleanData() {
+  var d = JSON.parse(JSON.stringify(DATA));
+  d.games.forEach(function (g) {
+    delete g._idEdited; g.name = String(g.name).trim(); g.ext = PLATS[g.plat] ? PLATS[g.plat].ext : g.ext;
+    g.progress = Math.max(0, Math.min(100, Number(g.progress) || 0)); g.downloads = Math.max(0, Number(g.downloads) || 0);
+    g.credits = (g.credits || []).filter(function (c) { return String(c[1]).trim(); }); g.log = (g.log || []).filter(function (l) { return String(l[1]).trim(); });
+    if (covers[g.id]) g.cover = "covers/" + g.id + ".jpg"; else if (g.cover && /^data:/.test(g.cover)) delete g.cover;
+  });
+  d.roadmap = d.roadmap.filter(function (w) { return String(w.name).trim(); }); d.supporters = d.supporters.filter(function (s) { return String(s.n).trim(); });
+  return d;
+}
+function problems() {
+  var p = [], seen = {};
+  DATA.games.forEach(function (g, i) {
+    var n = g.name ? "“" + g.name + "”" : "Game #" + (i + 1);
+    if (!String(g.name).trim()) p.push(n + ": nama belum diisi");
+    if (seen[g.id]) p.push(n + ": ID kembar"); seen[g.id] = 1;
+    if (g.url && !/^https?:\/\//i.test(g.url)) p.push(n + ": link unduh harus diawali http:// atau https://");
+  });
+  ["trakteer", "saweria"].forEach(function (k) { var u = DATA.donate[k]; if (u && !/^https?:\/\//i.test(u)) p.push("Link " + k + " harus diawali https://"); });
+  return p;
+}
+function filesToPublish() {
+  var d = cleanData(), enc = new TextEncoder(), out = [{ name: "data/site.json", data: enc.encode(JSON.stringify(d, null, 2) + "\n") }];
+  Object.keys(covers).forEach(function (id) { if (d.games.some(function (g) { return g.id === id; })) out.push({ name: "covers/" + id + ".jpg", data: dataUrlBytes(covers[id]) }); });
+  return out;
+}
+function bytesToB64(u8) { var s = "", ch = 0x8000; for (var i = 0; i < u8.length; i += ch) s += String.fromCharCode.apply(null, u8.subarray(i, i + ch)); return btoa(s); }
+function b64ToText(b) { var s = atob(b.replace(/\s/g, "")), a = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return new TextDecoder().decode(a); }
+
+function gh(cfg, method, path, body) {
+  return fetch("https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + "/contents/" + path.split("/").map(encodeURIComponent).join("/") + (method === "GET" ? "?ref=" + encodeURIComponent(cfg.branch) : ""), {
+    method: method, headers: { "Accept": "application/vnd.github+json", "Authorization": "Bearer " + cfg.token, "X-GitHub-Api-Version": "2022-11-28", "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined
+  });
+}
+function ghErr(r, extra) { return r.status === 401 ? "Token ditolak (salah atau kedaluwarsa)." : r.status === 403 ? "Token tidak punya izin menulis ke repo ini." : r.status === 404 ? "Repo, branch, atau file tidak ditemukan. Cek nama repo dan izin token." : r.status === 409 || r.status === 422 ? "Konflik versi, coba lagi." : "GitHub membalas " + r.status + "."; }
+function getCfg() { try { return JSON.parse(ls("zyfars-admin-gh") || "{}"); } catch (e) { return {}; } }
+
+function renderPublish(root) {
+  root.appendChild(el("h2", null, "Publikasi"));
+  root.appendChild(el("p", "lead", "Kirim perubahan ke situs. Pilih salah satu cara: langsung ke GitHub (sekali klik), atau unduh paket ZIP lalu unggah sendiri."));
+  var probs = problems();
+  if (probs.length) { var w = el("div", "warn"); w.appendChild(el("b", null, "Perbaiki dulu:")); var ul = el("ul"); ul.style.marginLeft = "20px"; probs.forEach(function (x) { ul.appendChild(el("li", null, x)); }); w.appendChild(ul); root.appendChild(w); }
+
+  var c1 = el("div", "card"); c1.appendChild(el("h3", null, "Cara 1 · Langsung ke GitHub (Pages / Cloudflare Pages dari repo)"));
+  var cfg = getCfg(), g = el("div", "grid"), o = { owner: cfg.owner || "", repo: cfg.repo || "", branch: cfg.branch || "main", dir: cfg.dir || "", token: cfg.token || "" };
+  g.appendChild(field("Pemilik repo (username)", inp("text", o, "owner", { ph: "username-github" })));
+  g.appendChild(field("Nama repo", inp("text", o, "repo", { ph: "situs-patch" })));
+  g.appendChild(field("Branch", inp("text", o, "branch", { ph: "main" })));
+  g.appendChild(field("Folder situs di repo", inp("text", o, "dir", { ph: "kosongkan jika di akar" }), "Isi hanya kalau index.html ada di dalam sub-folder."));
+  var tk = inp("password", o, "token", { ph: "github_pat_…" }); tk.autocomplete = "off";
+  g.appendChild(field("Token GitHub", tk, "Token ini yang menjadi “password” admin. Hanya orang yang punya token yang bisa mengubah situs.", true));
+  c1.appendChild(g);
+  var rm = el("label", "checks"), rmi = document.createElement("input"); rmi.type = "checkbox"; rmi.checked = !!cfg.remember; rm.appendChild(rmi); rm.appendChild(el("span", null, "Ingat di browser ini (jangan dicentang di komputer umum)")); rm.style.margin = "12px 0"; c1.appendChild(rm);
+  var log = el("div", "log"); log.textContent = "Belum ada aktivitas."; function say(t, cls) { var d = el("div", cls, t); if (log.textContent === "Belum ada aktivitas.") log.textContent = ""; log.appendChild(d); log.scrollTop = log.scrollHeight; }
+  function cfgNow() { var c = { owner: o.owner.trim(), repo: o.repo.trim().replace(/\.git$/, ""), branch: (o.branch || "main").trim(), dir: o.dir.trim().replace(/^\/+|\/+$/g, ""), token: o.token.trim() }; ls("zyfars-admin-gh", rmi.checked ? JSON.stringify(Object.assign({ remember: true }, c)) : null); return c; }
+  function pth(c, f) { return (c.dir ? c.dir + "/" : "") + f; }
+  var row = el("div", "row"), pub = el("button", "btn go", "Publikasikan sekarang"), pull = el("button", "btn", "Muat data terbaru dari GitHub"); pub.type = pull.type = "button"; row.appendChild(pub); row.appendChild(pull); c1.appendChild(row); c1.appendChild(log);
+  c1.appendChild(el("p", "note", "Setelah dipublikasikan, situs biasanya diperbarui dalam 1 sampai 2 menit."));
+  pull.addEventListener("click", function () {
+    var c = cfgNow(); if (!c.owner || !c.repo || !c.token) { toast("Isi pemilik, repo, dan token dulu"); return; }
+    if (dirty && !confirm("Perubahan yang belum dipublikasikan akan tertimpa. Lanjut?")) return;
+    say("Mengambil data/site.json …");
+    gh(c, "GET", pth(c, "data/site.json")).then(function (r) { if (!r.ok) throw new Error(ghErr(r)); return r.json(); }).then(function (j) { DATA = normalize(JSON.parse(b64ToText(j.content))); covers = {}; cur = 0; markClean(); say("Selesai. Data dimuat.", "ok"); render(); })
+      .catch(function (e) { say("Gagal: " + e.message, "err"); });
+  });
+  pub.addEventListener("click", function () {
+    if (probs.length) { toast("Perbaiki masalah di atas dulu"); return; }
+    var c = cfgNow(); if (!c.owner || !c.repo || !c.token) { toast("Isi pemilik, repo, dan token dulu"); return; }
+    var files = filesToPublish(); pub.disabled = true; log.textContent = ""; say("Mengirim " + files.length + " file ke " + c.owner + "/" + c.repo + " (" + c.branch + ") …");
+    var chain = Promise.resolve();
+    files.forEach(function (f) {
+      chain = chain.then(function () {
+        var path = pth(c, f.name);
+        return gh(c, "GET", path).then(function (r) { if (r.status === 404) return null; if (!r.ok) throw new Error(ghErr(r)); return r.json(); }).then(function (cur) {
+          var body = { message: "Admin: perbarui " + f.name, content: bytesToB64(f.data), branch: c.branch }; if (cur && cur.sha) body.sha = cur.sha;
+          return gh(c, "PUT", path, body).then(function (r) { if (!r.ok) throw new Error(ghErr(r)); say("✓ " + path, "ok"); });
+        });
+      });
+    });
+    chain.then(function () { say("Selesai. Situs akan diperbarui sebentar lagi.", "ok"); markClean(); render1(); }).catch(function (e) { say("Gagal: " + e.message, "err"); }).then(function () { pub.disabled = false; });
+    function render1() { $("dirty").textContent = "Tersimpan"; }
+  });
+  var how = el("details"); how.style.marginTop = "14px"; how.appendChild(el("summary", null, "Cara membuat token (sekali saja)"));
+  var ol = el("ol", "steps"); ["Buka GitHub > Settings > Developer settings > Personal access tokens > Fine-grained tokens > Generate new token.", "Repository access: pilih “Only select repositories” lalu pilih repo situsmu saja.", "Permissions > Repository permissions > Contents: Read and write.", "Generate, salin tokennya, tempel di kolom di atas. Token hanya terlihat sekali."].forEach(function (t) { ol.appendChild(el("li", null, t)); });
+  how.appendChild(ol); c1.appendChild(how); root.appendChild(c1);
+
+  var c2 = el("div", "card"); c2.appendChild(el("h3", null, "Cara 2 · Unduh paket ZIP"));
+  c2.appendChild(el("p", "note", "Berisi data/site.json dan cover yang baru. Ekstrak ke folder situsmu (timpa file lama), lalu unggah ke hosting seperti biasa."));
+  var dz = el("button", "btn go", "Unduh paket ZIP"); dz.type = "button"; dz.style.marginTop = "12px";
+  dz.addEventListener("click", function () {
+    if (probs.length) { toast("Perbaiki masalah di atas dulu"); return; }
+    var files = filesToPublish(), blob = makeZip(files), a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "update-situs-" + new Date().toISOString().slice(0, 10) + ".zip"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    toast("ZIP diunduh (" + files.length + " file)");
+  });
+  c2.appendChild(dz); root.appendChild(c2);
+
+  var c3 = el("div", "card"); c3.appendChild(el("h3", null, "Cadangan data")); var r3 = el("div", "row");
+  var ex = el("button", "btn", "Ekspor site.json"); ex.type = "button"; ex.addEventListener("click", function () { var b = new Blob([JSON.stringify(cleanData(), null, 2)], { type: "application/json" }), a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "site.json"; a.click(); });
+  var im = el("button", "btn", "Impor site.json…"); im.type = "button"; var f = document.createElement("input"); f.type = "file"; f.accept = ".json,application/json"; f.hidden = true;
+  im.addEventListener("click", function () { f.click(); });
+  f.addEventListener("change", function () { var fl = f.files[0]; if (!fl) return; fl.text().then(function (t) { DATA = normalize(JSON.parse(t)); covers = {}; cur = 0; markDirty(); toast("Data diimpor"); render(); }).catch(function () { toast("File JSON tidak valid"); }); });
+  r3.appendChild(ex); r3.appendChild(im); r3.appendChild(f); c3.appendChild(r3); root.appendChild(c3);
+}
+
+/* ---------- inti ---------- */
+function normalize(d) {
+  d = d && typeof d === "object" ? d : {};
+  d.games = Array.isArray(d.games) ? d.games : []; d.roadmap = Array.isArray(d.roadmap) ? d.roadmap : []; d.supporters = Array.isArray(d.supporters) ? d.supporters : [];
+  d.contact = d.contact || ""; d.donate = d.donate || {}; d.donate.trakteer = d.donate.trakteer || ""; d.donate.saweria = d.donate.saweria || "";
+  d.donate.goal = d.donate.goal || { label: "", target: 0, current: 0 }; d.sample = !!d.sample;
+  d.games.forEach(function (g) {
+    g.credits = g.credits || []; g.log = g.log || []; g.video = g.video || { yt: "", src: "" }; g.compat = g.compat || [];
+    g.sprite = g.sprite || "creature"; g.pal = g.pal || PAL; g.plat = PLATS[g.plat] ? g.plat : "PS1"; g.ext = g.ext || PLATS[g.plat].ext;
+    g.state = String(g.state).toLowerCase() === "final" ? "Final" : "Beta"; g.url = g.url || ""; g.size = g.size || ""; g.file = g.file || ""; g.desc = g.desc || "";
+    g.ver = g.ver || "1.0"; g.progress = Number(g.progress) || 0; g.downloads = Number(g.downloads) || 0;
+  });
+  return d;
+}
+var TABS = [["game", "Game"], ["wip", "WIP"], ["sup", "Pendukung"], ["site", "Situs"], ["pub", "Publikasi"]];
+function render() {
+  var tabs = $("tabs"); tabs.textContent = "";
+  TABS.forEach(function (t) { var b = el("button", "tab", t[1]); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(tab === t[0])); b.addEventListener("click", function () { tab = t[0]; render(); scrollTo(0, 0); }); tabs.appendChild(b); });
+  var m = $("main"); m.textContent = "";
+  ({ game: renderGames, wip: renderWip, sup: renderSup, site: renderSite, pub: renderPublish })[tab](m);
+}
+function start(d, fromDraft) {
+  DATA = normalize(d); render();
+  if (fromDraft) { dirty = true; $("dirty").textContent = "Draf dipulihkan, belum dipublikasikan"; $("dirty").classList.add("on"); }
+}
+function boot() {
+  var draft = null; try { draft = JSON.parse(ls("zyfars-admin-draft") || "null"); } catch (e) {}
+  fetch("data/site.json?v=" + Date.now(), { cache: "no-store" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+    if (draft && confirm("Ada draf yang belum dipublikasikan dari sesi sebelumnya. Lanjutkan draf itu?")) start(draft, true); else start(d);
+  }).catch(function () {
+    if (draft) { start(draft, true); toast("Memakai draf tersimpan"); return; }
+    start({}); tab = "pub"; render(); toast("data/site.json tidak terbaca. Buka lewat hosting, atau impor file site.json di tab Publikasi.");
+  });
+}
+boot();
+})();
+</script>
+</body>
+</html>

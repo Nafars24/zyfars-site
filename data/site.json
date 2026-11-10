@@ -1,0 +1,484 @@
+{
+  "sample": true,
+  "contact": "discord.com/zyfars",
+  "donate": {
+    "trakteer": "https://trakteer.id/naufal%20alfarisi23",
+    "saweria": "https://saweria.co/zyfarsT",
+    "goal": {
+      "label": "Buat Jajan",
+      "target": 500000,
+      "current": 0
+    }
+  },
+  "games": [
+    {
+      "id": "beyblade",
+      "name": "Beyblade",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "FINAL",
+      "progress": 100,
+      "downloads": 4,
+      "desc": "Beyblade PS1 BAHASA INDONESIA",
+      "file": "beyblade-zyfars.xdelta",
+      "size": "100kb",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": "media/preview-contoh.mp4"
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v0.8",
+          "Menu pengaturan diterjemahkan, teks terpotong diperbaiki."
+        ],
+        [
+          "v0.5",
+          "Seluruh dialog mode cerita."
+        ],
+        [
+          "v0.1",
+          "Rilis uji: judul dan menu utama."
+        ]
+      ]
+    },
+    {
+      "id": "digimon-rumble-arena",
+      "name": "Digimon Rumble Arena",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "FINAL",
+      "progress": 100,
+      "downloads": 4,
+      "desc": "Digimon Rumble Arena PS1 BAHASA INDONESIA",
+      "file": "digimon-rumble-arena-zyfars.xdelta",
+      "size": "100kb",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": "media/preview-contoh.mp4"
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v0.8",
+          "Menu pengaturan diterjemahkan, teks terpotong diperbaiki."
+        ],
+        [
+          "v0.5",
+          "Seluruh dialog mode cerita."
+        ],
+        [
+          "v0.1",
+          "Rilis uji: judul dan menu utama."
+        ]
+      ]
+    },
+    {
+      "id": "hyakuju-sentai",
+      "name": "Hyakuju Sentai GaoRanger",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "FINAL",
+      "progress": 100,
+      "downloads": 4,
+      "desc": "Hyakuju Sentai Gaoranger PS1 BAHASA INDONESIA",
+      "file": "hyakuju-zyfars.xdelta",
+      "size": "100kb",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": "media/preview-contoh.mp4"
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v0.8",
+          "Menu pengaturan diterjemahkan, teks terpotong diperbaiki."
+        ],
+        [
+          "v0.5",
+          "Seluruh dialog mode cerita."
+        ],
+        [
+          "v0.1",
+          "Rilis uji: judul dan menu utama."
+        ]
+      ]
+    },
+    {
+      "id": "power-rangers-time-force",
+      "name": "Power Ranger Time Force",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "FINAL",
+      "progress": 100,
+      "downloads": 4,
+      "desc": "Power Rangers Time Force PS1 BAHASA INDONESIA",
+      "file": "time-force-zyfars.xdelta",
+      "size": "100kb",
+      "url": "",
+      "video": {
+        "yt": "Z9zUEJRXNtQ",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ],
+        [
+          "Tester",
+          "isi-di-sini"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v0.8",
+          "Menu pengaturan diterjemahkan, teks terpotong diperbaiki."
+        ],
+        [
+          "v0.5",
+          "Seluruh dialog mode cerita."
+        ],
+        [
+          "v0.1",
+          "Rilis uji: judul dan menu utama."
+        ]
+      ]
+    },
+    {
+      "id": "twisted-metal-4",
+      "name": "Twisted Metal 4",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "FINAL",
+      "progress": 100,
+      "downloads": 4,
+      "desc": "Twisted Metal 4 PS1 BAHASA INDONESIA",
+      "file": "tm4-zyfars.xdelta",
+      "size": "100kb",
+      "url": "",
+      "video": {
+        "yt": "Z9zUEJRXNtQ",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ],
+        [
+          "Tester",
+          "isi-di-sini"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v0.8",
+          "Menu pengaturan diterjemahkan, teks terpotong diperbaiki."
+        ],
+        [
+          "v0.5",
+          "Seluruh dialog mode cerita."
+        ],
+        [
+          "v0.1",
+          "Rilis uji: judul dan menu utama."
+        ]
+      ]
+    },
+    {
+      "id": "judul-game-ps2",
+      "name": "Judul Game PS2",
+      "plat": "PS2",
+      "ext": "iso",
+      "sprite": "disc",
+      "pal": {
+        "a": "#ff8f5a",
+        "c": "#ffd2b8",
+        "d": "#8a3a14",
+        "k": "#2a1206",
+        "w": "#ffffff"
+      },
+      "ver": "0.3",
+      "state": "beta",
+      "progress": 35,
+      "downloads": 410,
+      "desc": "Slot contoh untuk game PS2. Ganti nama, deskripsi, dan checksum dengan data aslimu.",
+      "file": "judul-ps2-id-v0.3.xdelta",
+      "size": "isi ukuran file",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": "media/preview-contoh.mp4"
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "PCSX2",
+          1
+        ],
+        [
+          "Konsol asli",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v0.3",
+          "Bab 1 selesai."
+        ],
+        [
+          "v0.1",
+          "Menu utama."
+        ]
+      ]
+    },
+    {
+      "id": "judul-game-psp",
+      "name": "Judul Game PSP",
+      "plat": "PSP",
+      "ext": "iso",
+      "sprite": "umd",
+      "pal": {
+        "a": "#7dffb4",
+        "c": "#cfffe4",
+        "d": "#12663c",
+        "k": "#06180f",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "final",
+      "progress": 100,
+      "downloads": 2950,
+      "desc": "Slot contoh untuk game PSP yang sudah rampung 100 persen.",
+      "file": "judul-psp-id-v1.0.xdelta",
+      "size": "isi ukuran file",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": "media/preview-contoh.mp4"
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "PPSSPP",
+          1
+        ],
+        [
+          "Konsol asli",
+          1
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "Rilis penuh, semua teks dicek ulang."
+        ],
+        [
+          "v0.9",
+          "Uji akhir."
+        ]
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "name": "Grand Theft Auto 2",
+      "plat": "PS1",
+      "status": "Dikerjakan",
+      "pct": 20
+    },
+    {
+      "name": "LEGO Indiana Jones",
+      "plat": "PS2",
+      "status": "Dikerjakan",
+      "pct": 5
+    },
+    {
+      "name": "The Sims 2",
+      "plat": "PSP",
+      "status": "Dikerjakan",
+      "pct": 0
+    }
+  ],
+  "supporters": [
+    {
+      "n": "Zyfars",
+      "amt": 20000,
+      "via": "Trakteer",
+      "ym": "2026-11",
+      "msg": "Saya Sendiri wkwkw"
+    }
+  ]
+}
