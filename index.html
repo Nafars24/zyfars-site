@@ -391,11 +391,11 @@ var ROADMAP = [
 /* ym = bulan donasi (tahun-bulan). Contoh memakai bulan ini dan bulan lalu agar leaderboard terisi. */
 function ym(back) { var d = new Date(); d.setMonth(d.getMonth() - back); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); }
 var SUPPORTERS = [
-  { n: "Zyfars", amt: 20000, via: "Trakteer", ym: ym(0), msg: "Saya Sendiri wkwkw" },
+  { n: "Zyfars", amt: 20000, via: "Trakteer", ym: ym(0), msg: "Test" },
 ];
 var TIERS = [
-  { n: "Kopi", a: "mulai Rp1", p: ["Nama masuk leaderboard", "Penyemangat Saya"] },
-  { n: "Sponsor", a: "mulai Rp150.000", p: ["Boleh Request Game", "Prioritas"] }
+  { n: "Kopi", a: "mulai Rp1", p: ["Nama masuk leaderboard", "Orang Baik"] },
+  { n: "Sponsor", a: "mulai Rp50.000", p: ["Boleh Request Game", "Prioritas"] }
 ];
 
 /* Data dimuat dari data/site.json (diisi lewat admin.html). Isi di atas jadi cadangan kalau file itu tidak ada. */
@@ -562,7 +562,7 @@ function openDownload(g, step) {
       var s = st.step;
       if (s === 0) {
         body.appendChild(videoBlock(g));
-        body.appendChild(el("p", "note", "Cuplikan hasil terjemahan. Cek apakah teksnya sesuai selera sebelum mengunduh."));
+        body.appendChild(el("p", "note", "Preview Hasil."));
       } else {
         var a = el("a", "btn go", "Unduh " + g.file);
         a.href = g.url || "#unduh"; if (g.url) { a.target = "_blank"; a.rel = "noopener"; a.setAttribute("download", ""); }
@@ -662,7 +662,7 @@ function emptyPanel(p, plat) {
 }
 function homePanel(p) {
   head(p, "Selamat datang", [["Fan translation", "hot"], ["Zyfars"]]);
-  p.appendChild(el("p", "lead", "Patch terjemahan bahasa Indonesia untuk game PS1, PS2, dan PSP. Pilih konsol di menu atas, tonton preview-nya, lalu unduh patch xdelta-nya."));
+  p.appendChild(el("p", "lead", "Patch terjemahan bahasa Indonesia untuk game PS1, PS2, dan PSP. Pilih konsol di menu atas, tonton preview-nya, lalu unduh."));
   var avg = Math.round(GAMES.reduce(function (a, g) { return a + g.progress; }, 0) / Math.max(1, GAMES.length));
   var dls = GAMES.reduce(function (a, g) { return a + g.downloads; }, 0);
   var names = {}; SUPPORTERS.forEach(function (s) { names[s.n] = 1; });
@@ -677,7 +677,7 @@ function homePanel(p) {
   row.appendChild(b1); row.appendChild(b2); p.appendChild(row);
   sub(p, "Hanya patch");
   var w = el("div", "warn"); w.appendChild(el("b", null, "Catatan"));
-  w.appendChild(document.createTextNode("Situs ini hanya membagikan file patch (.xdelta). Tidak ada ISO atau ROM."));
+  w.appendChild(document.createTextNode("Semua Hasil GRATIS, tapi jika ingin reupload mohon cantumkan KREDIT!!."));
   p.appendChild(w);
 }
 function feedPanel(p) {
@@ -703,18 +703,18 @@ function roadPanel(p) {
   p.appendChild(r);
 }
 function stepsPanel(p) {
-  head(p, "Cara pasang patch", [["3 langkah", "hot"]]);
-  [["Siapkan dump", "Buat dump dari disc original milikmu (.bin/.cue untuk PS1, .iso untuk PS2 dan PSP). Pastikan dump-nya dari versi game yang sama dengan yang diterjemahkan."],
-   ["Terapkan patch", "Buka xdelta UI atau Delta Patcher, pilih file asli, pilih file .xdelta, lalu tentukan nama hasil. Pengguna terminal bisa memakai perintah di langkah unduh."],
-   ["Main", "Jalankan hasilnya di emulator (DuckStation, PCSX2, PPSSPP) atau di konsol asli yang sudah dimodifikasi. Simpan dump aslimu, patch tidak mengubahnya."]].forEach(function (s, i) {
+  head(p, "Cara Download", [["3 langkah", "hot"]]);
+  [["PILIH GAME", "Pilih Game yang akan kalian download di tab PS1, PSP dan PS2."],
+   ["KLIK PREVIEW", "Pilih button preview agar kalian bisa melihat dulu hasil terjemahan saya, dan klik download"],
+   ["Main", "Jalankan hasil dowloadnya di emulator (DuckStation, PCSX2, PPSSPP) atau di konsol kalian."]].forEach(function (s, i) {
     var d = el("div", "step"); d.appendChild(el("i", null, String(i + 1)));
     var b = el("div"); b.appendChild(el("h3", null, s[0])); b.appendChild(el("p", null, s[1])); d.appendChild(b); p.appendChild(d);
   });
 }
 function faqPanel(p) {
   head(p, "Pertanyaan umum", [["FAQ", "hot"]]);
-  [["Patch gagal, checksum tidak cocok?", "Dump kamu berbeda dari yang dipakai penerjemah (region lain, hasil rip berbeda, atau file sudah diubah). Buat dump ulang dan cocokkan CRC32, MD5, atau SHA-1."],
-   ["Kenapa tidak ada link ISO?", "Patch hanya berisi selisih antara file asli dan hasil terjemahan, jadi tidak mengandung data game utuh. Itu sebabnya perlu disc original milik sendiri."],
+  [["Bisa Dimainkan dimana?", "Semua patch disini akan dipastikan tested di Emulator, Eboot buat PSP, dan juga konsolnya."],
+   ["Bisa Request game?", "Bisa, Semua Request akan dipertimbangkan dan dieksekusi sesuai urutannya."],
    ["Apakah donasi wajib?", "Tidak. Semua patch gratis. Donasi hanya membantu biaya domain dan memberi semangat untuk game berikutnya."],
    ["Bagaimana melaporkan salah terjemah?", "Kirim nama game, versi patch, dan foto layar lewat kontak. Perbaikan masuk ke versi berikutnya dan dicatat di changelog."]].forEach(function (f) {
     var d = el("div", "step"); d.appendChild(el("i", null, "?"));
@@ -722,9 +722,9 @@ function faqPanel(p) {
   });
 }
 function legalPanel(p) {
-  head(p, "Hanya patch, tanpa ISO", [["Penting", "beta"]]);
+  head(p, "TRANSLATE ORIGINAL ZYFARS", [["Penting", "beta"]]);
   var w = el("div", "warn"); w.appendChild(el("b", null, "Catatan"));
-  w.appendChild(document.createTextNode("Situs ini hanya membagikan file patch (.xdelta). Tidak ada ISO atau ROM yang dibagikan di sini. Kamu perlu dump disc original milikmu sendiri. Terjemahan ini fanmade dan nonkomersial. Donasi adalah dukungan sukarela untuk penerjemah, bukan pembayaran untuk game."));
+  w.appendChild(document.createTextNode("Jika ingin mengupload ulang tolong cantumkan kredit KESINI! ke zyfars.site !!"));
   p.appendChild(w);
 }
 function donatePanel(p) {
@@ -782,7 +782,7 @@ function lbPanel(p) {
       r.appendChild(el("span", "am", rp(x.amt))); lb.appendChild(r);
     });
     holder.appendChild(lb);
-    holder.appendChild(el("p", "note", SAMPLE ? "Data contoh. Perbarui array SUPPORTERS dari dashboard Trakteer atau Saweria." : "Diperbarui berkala dari dashboard Trakteer dan Saweria."));
+    holder.appendChild(el("p", "note", SAMPLE ? "Kumpulan orang baik" : "Diperbarui berkala dari dashboard Trakteer dan Saweria."));
   }
   draw();
 }
@@ -824,7 +824,7 @@ CATS.push({ id: "beranda", label: "Beranda", svg: "home", items: [
 CATS.push({ id: "panduan", label: "Panduan", svg: "book", items: [
   I("cara-pasang", "Cara pasang", "3 langkah", "steps", stepsPanel),
   I("pertanyaan-umum", "Pertanyaan umum", "FAQ", "help", faqPanel),
-  I("hanya-patch", "Hanya patch", "Soal legal", "shield", legalPanel)
+  I("hanya-patch", "Zyfars", "Soal legal", "shield", legalPanel)
 ] });
 CATS.push({ id: "donasi", label: "Donasi", svg: "heart", items: [
   I("traktir", "Traktir Zyfars", "Trakteer dan Saweria", "heart", donatePanel),
