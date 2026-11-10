@@ -572,11 +572,6 @@ function openDownload(g, step) {
         });
         body.appendChild(a);
         body.appendChild(el("p", "note", "Ukuran " + g.size + " · v" + g.ver + " · " + g.downloads.toLocaleString("id-ID") + " unduhan"));
-        body.appendChild(el("div", "sub", "Pasang lewat terminal"));
-        var cmd = 'xdelta3 -d -s "ASLI.' + g.ext + '" "' + g.file + '" "HASIL.' + g.ext + '"';
-        var cr = el("div", "cmdrow"); cr.appendChild(el("div", "cmd", cmd));
-        var cb = el("button", "btn sm", "Salin"); cb.type = "button"; cb.addEventListener("click", function () { copy(cmd, cb); });
-        cr.appendChild(cb); body.appendChild(cr);
         var cta = el("div", "cta"); cta.appendChild(el("p", null, "Terjemahan ini gratis dan dikerjakan di waktu luang. Kalau terbantu, traktir Zyfars supaya semangat barudaks."));
         var row = el("div", "row");
         row.appendChild(payLink("Trakteer", DONATE.trakteer, true)); row.appendChild(payLink("Saweria", DONATE.saweria, true));
