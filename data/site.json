@@ -12,6 +12,59 @@
   },
   "games": [
     {
+      "id": "assassin-creed-bloodlines",
+      "name": "Assassin Creed Bloodlines",
+      "plat": "PSP",
+      "ext": "iso",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "Final",
+      "progress": 100,
+      "downloads": 0,
+      "desc": "Assassin Creed Bloodlines PSP BAHASA INDONESIA",
+      "file": "Assassin Creed Bloodlines (Zyfars).zip",
+      "size": "518Mb",
+      "url": "https://drive.google.com/file/d/18vW2p8X_d9hbuvWmU1Oyi91qnZ6_c9i6/view?usp=sharing",
+      "video": {
+        "yt": "",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "PPSSPP",
+          1
+        ],
+        [
+          "Konsol PSP",
+          1
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "FINAL"
+        ]
+      ],
+      "cover": "covers/assassin-creed-bloodlines.jpg"
+    },
+    {
       "id": "the-sims-2",
       "name": "The Sims 2",
       "plat": "PSP",
