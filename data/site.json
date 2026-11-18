@@ -12,6 +12,225 @@
   },
   "games": [
     {
+      "id": "kamen-rider-kuuga",
+      "name": "Kamen Rider Kuuga",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "Final",
+      "progress": 100,
+      "downloads": 0,
+      "desc": "Kamen Rider Kuuga PS1 BAHASA INDONESIA",
+      "file": "Kamen Rider Kuuga (Zyfars).zip",
+      "size": "110Mb",
+      "url": "https://drive.google.com/file/d/1FEVAnKTCQZNtcpb6XNIUJeY1ziT5YYkY/view?usp=sharing",
+      "video": {
+        "yt": "",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          1
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "Rilis pertama."
+        ]
+      ],
+      "cover": "covers/kamen-rider-kuuga.jpg"
+    },
+    {
+      "id": "lego-island-2",
+      "name": "LEGO Island 2",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "Final",
+      "progress": 100,
+      "downloads": 0,
+      "desc": "LEGO Island 2 PS1 BAHASA INDONESIA",
+      "file": "lego-island-2-id.xdelta",
+      "size": "171Mb",
+      "url": "https://drive.google.com/file/d/1ApjO6FYOU5gBF00O-0_Byo4rG0PygZk-/view?usp=sharing",
+      "video": {
+        "yt": "",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          1
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "Rilis pertama."
+        ]
+      ],
+      "cover": "covers/lego-island-2.jpg"
+    },
+    {
+      "id": "naruto-shinobi-no-sato-no-jintori-gassen",
+      "name": "Naruto Shinobi no Sato no Jintori Gassen",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "Final",
+      "progress": 100,
+      "downloads": 0,
+      "desc": "Naruto Shinobi no Sato no Jintori Gassen PS1 BAHASA INDONESIA",
+      "file": "Naruto Shinobi no Sato no Jintori Gassen.zip",
+      "size": "",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": ""
+      },
+      "credits": [],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          0
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "Rilis pertama."
+        ]
+      ],
+      "cover": "covers/naruto-shinobi-no-sato-no-jintori-gassen.jpg"
+    },
+    {
+      "id": "toy-story-2",
+      "name": "Toy Story 2",
+      "plat": "PS1",
+      "ext": "bin",
+      "sprite": "creature",
+      "pal": {
+        "a": "#4aa8ff",
+        "c": "#a9d8ff",
+        "d": "#1b4f9c",
+        "k": "#0a1630",
+        "w": "#ffffff"
+      },
+      "ver": "1.0",
+      "state": "Final",
+      "progress": 100,
+      "downloads": 0,
+      "desc": "Toy Story 2 PS1 BAHASA INDONESIA",
+      "file": "toy-story-2-id.xdelta",
+      "size": "425Mb",
+      "url": "",
+      "video": {
+        "yt": "",
+        "src": ""
+      },
+      "credits": [
+        [
+          "Penerjemah",
+          "Zyfars"
+        ],
+        [
+          "Hacking & tools",
+          "Zyfars"
+        ]
+      ],
+      "compat": [
+        [
+          "DuckStation",
+          1
+        ],
+        [
+          "EPSXE",
+          1
+        ],
+        [
+          "Konsol PS1",
+          1
+        ]
+      ],
+      "log": [
+        [
+          "v1.0",
+          "Rilis pertama."
+        ]
+      ],
+      "cover": "covers/toy-story-2.jpg"
+    },
+    {
       "id": "assassin-creed-bloodlines",
       "name": "Assassin Creed Bloodlines",
       "plat": "PSP",
