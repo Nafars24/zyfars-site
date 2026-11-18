@@ -30,8 +30,8 @@
       "downloads": 0,
       "desc": "LEGO Indiana Jones PS2 BAHASA INDONESIA",
       "file": "Lego Indiana Jones (Zyfars).zip",
-      "size": "",
-      "url": "",
+      "size": "1,5Gb",
+      "url": "https://drive.google.com/file/d/1NkW99l6zkw7jItUmXbIlrVbJ_qsvpB0q/view?usp=sharing",
       "video": {
         "yt": "",
         "src": ""
@@ -52,8 +52,7 @@
           "v1.0",
           "Rilis pertama."
         ]
-      ],
-      "cover": "covers/lego-indiana-jones.jpg"
+      ]
     },
     {
       "id": "resident-evil-outbreak-file-1",
@@ -74,8 +73,8 @@
       "downloads": 0,
       "desc": "Resident Evil Outbreak File #1 PS2 BAHASA INDONESIA",
       "file": "Resident Evil Outbreak File 1.zip",
-      "size": "",
-      "url": "",
+      "size": "3,35Gb",
+      "url": "https://drive.google.com/file/d/1owy7UAQBhqR-JrvR5wjNhF_yUinLxXEG/view?usp=sharing",
       "video": {
         "yt": "",
         "src": ""
@@ -105,8 +104,7 @@
           "v1.0",
           "Rilis pertama."
         ]
-      ],
-      "cover": "covers/resident-evil-outbreak-file-1.jpg"
+      ]
     },
     {
       "id": "kamen-rider-kuuga",
@@ -244,7 +242,7 @@
       "size": "86Mb",
       "url": "https://drive.google.com/file/d/1Z04b6lVdaj8ehxneFSBi9z4uEEolU9jI/view?usp=sharing",
       "video": {
-        "yt": "",
+        "yt": "9xQAj7RY_EA",
         "src": ""
       },
       "credits": [],
@@ -690,6 +688,12 @@
     {
       "name": "Innocent Life: Futuristic Harvest Moon",
       "plat": "PSP",
+      "status": "Dikerjakan",
+      "pct": 0
+    },
+    {
+      "name": "Dino Crisis",
+      "plat": "PS1",
       "status": "Dikerjakan",
       "pct": 0
     }
